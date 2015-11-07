@@ -1,0 +1,25 @@
+<ion-view view-title="Sensores">
+    <ion-content class="padding" ng-init="i = 1">
+        <div ng-repeat="zone in zones" class="list card">
+            <div class="item item-divider">{{ zone.name }}</div>
+            <div class="item item-body item-sensor">
+                <div class="row">
+                    <div ng-repeat="sensor in zone.sensors" class="col col-33">
+                        <div ng-if="sensor.type == 'temperature' || sensor.type == 'humidity'" class="sensor sensor-gauge">
+                            <div class="sensor-title">{{ sensor.name }}</div>
+                            <canvas id="gauge-{{$parent.$parent.$index}}-{{$parent.$index}}" width="100" height="50" class="sensor-canvas"></canvas>
+                            <div id="gauge-text-{{$parent.$parent.$index}}-{{$parent.$index}}" class="sensor-value sensor-value-{{ sensor.type }}"></div>
+                        </div>
+                        <div ng-if="sensor.type == 'movement'" class="sensor sensor-movement">
+                            <div class="sensor-title">{{ sensor.name }}</div>
+                            <img src="img/{{ sensor.toggle ? 'sensor-movement2.gif' : 'sensor-movement1.svg' }}">
+                            <div class="sensor-value sensor-value-movement">
+                                {{ sensor.toggle ? 'Sí' : 'No' }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </ion-content>
+</ion-view>

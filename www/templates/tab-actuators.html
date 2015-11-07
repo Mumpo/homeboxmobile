@@ -1,0 +1,26 @@
+<ion-view view-title="Actuadores">
+    <ion-content class="padding">
+        <div ng-repeat="zone in zones" class="list card">
+            <div class="item item-divider">{{ zone.name }}</div>
+            <div class="item item-body item-sensor">
+                <div ng-repeat="actuator in zone.actuators" class="actuator">
+                    <div class="actuator-title">{{ actuator.name }}</div>
+                    <div class="actuator-toggle">
+                        <label class="toggle toggle-energized">
+                            <input type="checkbox" ng-model="actuator.toggle">
+                                <div class="track">
+                                    <div class="handle"></div>
+                                </div>
+                        </label>
+                    </div>
+                    <div ng-if="actuator.value !== undefined" class="actuator-range">
+                        <div class="item range range-energized">
+                            <input type="range" name="value" min="{{ actuator.min_value }}" max="{{ actuator.max_value }}" ng-model="actuator.value">
+                        </div>
+                    </div>
+                    <div ng-if="actuator.value !== undefined" class="actuator-value">{{ actuator.value }}{{ actuator.unit }}</div>
+                </div>
+            </div>
+        </div> 
+    </ion-content>
+</ion-view>

@@ -1,0 +1,35 @@
+<ion-view view-title="Alertas">
+ 	<ion-content>
+		<ion-list>
+			<div ng-repeat="zone in zones">
+				<ion-item class="item-divider">
+					{{ zone.name }}
+				</ion-item>
+				<div ng-repeat="sensor in zone.sensors" >
+		  			<ion-item class="item-icon-left item-icon-right" ng-init="sensor.editAlert = false">
+		  				<i class="icon ion-{{ 
+		  					sensor.type == 'temperature' ? 'thermometer' :
+		  					sensor.type == 'humidity' ? 'ios-rainy-outline' : 'android-walk' }}"></i>
+		  				{{ sensor.name }}
+		  				<button class="button button-icon icon {{ sensor.active ? 'button-energized ion-android-alert' : 'ion-ios-plus-outline'}}" ng-click="sensor.editAlert = !sensor.editAlert" ng-click="showAlert(sensor)"></button>
+		  			</ion-item>
+		  			<ion-item ng-if="sensor.editAlert" ng-init="alert = initAlert(sensor)";>
+		  				<div class="row">
+			  				<div class="col col-80">
+		  						<rzslider ng-if="sensor.type != 'movement'" rz-slider-floor="alert.min" rz-slider-model="alert.min_value" rz-slider-high="alert.max_value" rz-slider-ceil="alert.max"></rzslider>
+		  					</div>
+		  					<div class="col col-20 alert-toggle">
+		  						<label class="toggle toggle-energized">
+		                            <input type="checkbox" ng-model="actuator.toggle" ng-checked="sensor.active" ng-click="sensor.active = !sensor.active">
+		                                <div class="track">
+		                                    <div class="handle"></div>
+		                                </div>
+		                        </label>
+		  					</div>
+	  					</div>
+	  				</ion-item>
+	  			</div>
+			</div>
+		</ion-list>
+  	</ion-content>
+</ion-view>
